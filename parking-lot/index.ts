@@ -140,6 +140,14 @@ class ParkingRate {
   }
 }
 
+class Payment {
+  //TODO: Implement Payment
+}
+
+class ExitIns {
+  //T TODO: Implement ExitInst
+}
+
 abstract class Vehicle {
   private licensePlate: string;
 
@@ -153,18 +161,72 @@ abstract class Vehicle {
 }
 
 class ParkingTicket {
-  private ticketNumber: string;
+  private ticketNo: string;
+  private timestamp: Date;
+  private exit: Exit;
+  private amount: number;
+  private status: string;
+  private vehicle: Vehicle;
+  private payment: Payment;
+  private entrance: Entrance;
+  private exitIns: ExitIns;
 
-  constructor(ticketNumber: string) {
-    this.ticketNumber = ticketNumber;
+  constructor(
+    ticketNo: string,
+    timestamp: Date,
+    exit: Exit,
+    amount: number,
+    status: string,
+    vehicle: Vehicle,
+    payment: Payment,
+    entrance: Entrance,
+    exitIns: ExitIns,
+  ) {
+    this.ticketNo = ticketNo;
+    this.timestamp = timestamp;
+    this.exit = exit;
+    this.amount = amount;
+    this.status = status;
+    this.vehicle = vehicle;
+    this.payment = payment;
+    this.entrance = entrance;
+    this.exitIns = exitIns;
   }
 
-  getTicketNumber(): string {
-    return this.ticketNumber;
+  getTicketNo(): string {
+    return this.ticketNo;
   }
 
-  setTicketNumber(ticketNumber: string): void {
-    this.ticketNumber = ticketNumber;
+  getTimestamp(): Date {
+    return this.timestamp;
+  }
+
+  getExit(): Exit {
+    return this.exit;
+  }
+
+  getAmount(): number {
+    return this.amount;
+  }
+
+  getStatus(): string {
+    return this.status;
+  }
+
+  getVehicle(): Vehicle {
+    return this.vehicle;
+  }
+
+  getPayment(): Payment {
+    return this.payment;
+  }
+
+  getEntrance(): Entrance {
+    return this.entrance;
+  }
+
+  getExitIns(): ExitIns {
+    return this.exitIns;
   }
 }
 
