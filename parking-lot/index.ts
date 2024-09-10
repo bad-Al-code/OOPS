@@ -446,9 +446,25 @@ class DisplayBoard {
 }
 
 class Entrance {
-  // TODO: Implementation of Entrance class
+  private id: string;
+  constructor(id: string) {
+    this.id = id;
+  }
+
+  getTicket(): ParkingTicket {
+    return new ParkingTicket("SampleTicketNumber");
+  }
 }
 
 class Exit {
-  // TODO: Implementation of Exit class
+  private id: string;
+
+  constructor(id: string) {
+    this.id = id;
+  }
+
+  validateTicket(ticket: ParkingTicket): void {
+    // TODO: validate parking ticket
+    console.log(`Validating ticket: ${ticket.getTicketNumber()}`);
+  }
 }
