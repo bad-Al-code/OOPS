@@ -123,3 +123,150 @@ class Address {
     this.country = country;
   }
 }
+
+class Vehicle {
+  private licensePlate: string;
+
+  constructor(licensePlate: string) {
+    this.licensePlate = licensePlate;
+  }
+
+  getLicensePlate(): string {
+    return this.licensePlate;
+  }
+
+  setLicensePlate(licensePlate: string): void {
+    this.licensePlate = licensePlate;
+  }
+}
+
+abstract class ParkingSpot {
+  protected id: string;
+  protected isFree: boolean;
+  protected vehicle?: Vehicle;
+
+  constructor(id: string, isFree: boolean, vehicle?: Vehicle) {
+    if (new.target === ParkingSpot) {
+      throw new Error("Abstract classes can't be instantiated.");
+    }
+    this.id = id;
+    this.isFree = isFree;
+    this.vehicle = vehicle;
+  }
+
+  abstract getIsFree(): boolean;
+  abstract assignVehicle(vehicle: Vehicle): void;
+  abstract removeVehicle(): void;
+}
+
+class Handicapped extends ParkingSpot {
+  constructor(id: string, isFree: boolean, vehicle?: Vehicle) {
+    super(id, isFree, vehicle);
+  }
+
+  getIsFree(): boolean {
+    return this.isFree;
+  }
+
+  assignVehicle(vehicle: Vehicle): void {
+    if (this.isFree) {
+      this.vehicle = vehicle;
+      this.isFree = false;
+    } else {
+      throw new Error("Parking spot is not free");
+    }
+  }
+
+  removeVehicle(): void {
+    if (!this.isFree) {
+      this.vehicle = undefined;
+      this.isFree = true;
+    } else {
+      throw new Error("Parking spot is already free.");
+    }
+  }
+}
+
+class CompactSpot extends ParkingSpot {
+  constructor(id: string, isFree: boolean, vehicle?: Vehicle) {
+    super(id, isFree, vehicle);
+  }
+
+  getIsFree(): boolean {
+    return this.isFree;
+  }
+
+  assignVehicle(vehicle: Vehicle): void {
+    if (this.isFree) {
+      this.vehicle = vehicle;
+      this.isFree = false;
+    } else {
+      throw new Error("Parking spot is not free.");
+    }
+  }
+
+  removeVehicle(): void {
+    if (!this.isFree) {
+      this.vehicle = undefined;
+      this.isFree = true;
+    } else {
+      throw new Error("Parking spot is already free.");
+    }
+  }
+}
+
+class LargeSpot extends ParkingSpot {
+  constructor(id: string, isFree: boolean, vehicle?: Vehicle) {
+    super(id, isFree, vehicle);
+  }
+
+  getIsFree(): boolean {
+    return this.isFree;
+  }
+
+  assignVehicle(vehicle: Vehicle): void {
+    if (this.isFree) {
+      this.vehicle = vehicle;
+      this.isFree = false;
+    } else {
+      throw new Error("Parking spot is not free.");
+    }
+  }
+
+  removeVehicle(): void {
+    if (!this.isFree) {
+      this.vehicle = undefined;
+      this.isFree = true;
+    } else {
+      throw new Error("Parking spot is already free.");
+    }
+  }
+}
+
+class Motorcycle extends ParkingSpot {
+  constructor(id: string, isFree: boolean, vehicle?: Vehicle) {
+    super(id, isFree, vehicle);
+  }
+
+  getIsFree(): boolean {
+    return this.isFree;
+  }
+
+  assignVehicle(vehicle: Vehicle): void {
+    if (this.isFree) {
+      this.vehicle = vehicle;
+      this.isFree = false;
+    } else {
+      throw new Error("Parking spot is not free.");
+    }
+  }
+
+  removeVehicle(): void {
+    if (!this.isFree) {
+      this.vehicle = undefined;
+      this.isFree = true;
+    } else {
+      throw new Error("Parking spot is already free.");
+    }
+  }
+}
