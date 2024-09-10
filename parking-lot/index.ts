@@ -124,6 +124,22 @@ class Address {
   }
 }
 
+class ParkingRate {
+  private id: string;
+  private hours: number;
+  private rate: number;
+
+  constructor(id: string, hours: number, rate: number) {
+    this.id = id;
+    this.hours = hours;
+    this.rate = rate;
+  }
+
+  calculate(): number {
+    return this.hours * this.rate;
+  }
+}
+
 abstract class Vehicle {
   private licensePlate: string;
 
@@ -166,9 +182,16 @@ abstract class ParkingSpot {
     this.vehicle = vehicle;
   }
 
-  abstract getIsFree(): boolean;
   abstract assignVehicle(vehicle: Vehicle): void;
   abstract removeVehicle(): void;
+
+  getId(): string {
+    return this.id;
+  }
+
+  getIsFree(): boolean {
+    return this.isFree;
+  }
 }
 
 class Handicapped extends ParkingSpot {
@@ -398,7 +421,28 @@ class ParkingAttendant extends Account {
 }
 
 class DisplayBoard {
-  // TODO: Implementation of DisplayBoard class
+  private id: string;
+  private parkingSpots: Map<string, ParkingSpot[]>;
+
+  constructor(id: string) {
+    this.id = id;
+    this.parkingSpots = new Map<string, ParkingSpot[]>();
+  }
+
+  addParkingSpot(spotType: string, spots: ParkingSpot[]): void {
+    this.parkingSpots.set(spotType, spots);
+  }
+
+  showFreeSlot(): void {
+    for (const [spotType, spots] of this.parkingSpots) {
+      console.log(`Spot Type: ${spotType}`);
+      spots.forEach((spot) => {
+        if (spot.getIsFree()) {
+          console.log(`Free spot ID: ${spot.getId()}`);
+        }
+      });
+    }
+  }
 }
 
 class Entrance {
