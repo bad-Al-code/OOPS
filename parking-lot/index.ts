@@ -140,8 +140,41 @@ class ParkingRate {
   }
 }
 
-class Payment {
-  //TODO: Implement Payment
+abstract class Payment {
+  private amount: number;
+  private status: PaymentStatus;
+  private timestamp: Date;
+
+  constructor(amount: number, status: PaymentStatus, timestamp: Date) {
+    if (new.target === Payment) {
+      throw new Error("Abstract classes can't be instantiated.");
+    }
+    this.amount = amount;
+    this.status = status;
+    this.timestamp = timestamp;
+  }
+
+  abstract initiateTransaction(): void;
+}
+
+class Cash extends Payment {
+  constructor(amount: number, status: PaymentStatus, timestamp: Date) {
+    super(amount, status, timestamp);
+  }
+
+  initiateTransaction(): void {
+    // TODO: Initiate a cash transaction
+  }
+}
+
+class CreditCard extends Payment {
+  constructor(amount: number, status: PaymentStatus, timestamp: Date) {
+    super(amount, status, timestamp);
+  }
+
+  initiateTransaction(): void {
+    // TODO: Intiate a CreditCard transaction
+  }
 }
 
 class ExitIns {
