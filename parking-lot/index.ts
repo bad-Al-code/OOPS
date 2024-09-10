@@ -322,3 +322,89 @@ class MotorCycle extends Vehicle {
     // TODO: Implementation for MotorCycle
   }
 }
+
+abstract class Account {
+  protected userName: string;
+  protected password: string;
+  protected person: Person;
+  protected status: AccountStatus;
+
+  constructor(
+    userName: string,
+    password: string,
+    person: Person,
+    status: AccountStatus,
+  ) {
+    if (new.target === Account) {
+      throw new Error("Abstract classes can't be instantiated.");
+    }
+    this.userName = userName;
+    this.password = password;
+    this.person = person;
+    this.status = status;
+  }
+
+  abstract resetPassword(): void;
+}
+
+class Admin extends Account {
+  constructor(
+    userName: string,
+    password: string,
+    person: Person,
+    status: AccountStatus,
+  ) {
+    super(userName, password, person, status);
+  }
+
+  addParkingSpot(spot: ParkingSpot): void {
+    // TODO: Implementation for adding a parking spot
+  }
+
+  addDisplayBoard(displayBoard: DisplayBoard): void {
+    // TODO: Implementation for adding a display board
+  }
+
+  addEntrance(entrance: Entrance): void {
+    // TODO: Implementation for adding an entrance
+  }
+
+  addExit(exit: Exit): void {
+    // TODO: Implementation for adding an exit
+  }
+
+  resetPassword(): void {
+    // TODO: Implementation for resetting password
+  }
+}
+
+class ParkingAttendant extends Account {
+  constructor(
+    userName: string,
+    password: string,
+    person: Person,
+    status: AccountStatus,
+  ) {
+    super(userName, password, person, status);
+  }
+
+  processTicket(ticketNumber: string): void {
+    // TODO: Implementation for processing a ticket
+  }
+
+  resetPassword(): void {
+    // TODO: Implementation for resetting password
+  }
+}
+
+class DisplayBoard {
+  // TODO: Implementation of DisplayBoard class
+}
+
+class Entrance {
+  // TODO: Implementation of Entrance class
+}
+
+class Exit {
+  // TODO: Implementation of Exit class
+}
