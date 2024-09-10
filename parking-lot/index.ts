@@ -261,6 +261,10 @@ class ParkingTicket {
   getExitIns(): ExitIns {
     return this.exitIns;
   }
+
+  setStatus(status: string): void {
+    this.status = status;
+  }
 }
 
 abstract class ParkingSpot {
@@ -422,12 +426,28 @@ class Van extends Vehicle {
 }
 
 class Truck extends Vehicle {
+  private ticket?: ParkingTicket;
+
   constructor(licenseNo: string) {
     super(licenseNo);
   }
 
   assignTicket(ticket: ParkingTicket): void {
-    // TODO: Implementation for Truck
+    if (this.ticket) {
+      throw new Error("A ticket has already been assigned to this truck");
+    }
+
+    if (!ticket || ticket.getStatus() !== "PENDING") {
+      throw new Error("Invalid or already processed ticket.");
+    }
+
+    this.ticket = ticket;
+
+    ticket.setStatus("ASSIGNED");
+  }
+
+  getAssignedTicket(): ParkingTicket | undefined {
+    return this.ticket;
   }
 }
 
