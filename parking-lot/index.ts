@@ -563,3 +563,65 @@ class Exit {
     console.log(`Validating ticket: ${ticket.getTicketNumber()}`);
   }
 }
+
+class ParkingLot {
+  private static _instance: ParkingLot | null = null;
+
+  private id: string;
+  private name: string;
+  private address: string;
+  private parkingRate: number;
+
+  private entranceMap: Map<string, Entrance> = new Map();
+  private exitMap: Map<string, Exit> = new Map();
+  private tickets: Map<string, ParkingTicket> = new Map();
+
+  private constructor(
+    id: string,
+    name: string,
+    address: string,
+    parkingRate: number,
+  ) {
+    if (ParkingLot._instance) {
+      throw new Error(
+        "Singleton classes can't be instantiated more than once.",
+      );
+    }
+    ParkingLot._instance = this;
+
+    this.id = id;
+    this.name = name;
+    this.address = address;
+    this.parkingRate = parkingRate;
+  }
+
+  static getInstance(
+    id: string,
+    name: string,
+    address: string,
+    parkingRate: number,
+  ): ParkingLot {
+    if (!ParkingLot._instance) {
+      ParkingLot._instance = new ParkingLot(id, name, address, parkingRate);
+    }
+    return ParkingLot._instance;
+  }
+
+  addEntrance(entrance: Entrance): void {
+    // TODO: ADd Entrance
+  }
+
+  addExit(exit: Exit): void {
+    // TODO: Add Exit
+  }
+
+  getParkingTicket(vehicle: Vehicle): ParkingTicket {
+    // TODO: get a praking ticket for given vehicle
+    return {} as ParkingTicket;
+  }
+
+  isFull(type: string): boolean {
+    // TODO: check if parking lot is full for given type
+    return false;
+  }
+}
