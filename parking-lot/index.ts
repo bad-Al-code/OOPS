@@ -124,19 +124,31 @@ class Address {
   }
 }
 
-class Vehicle {
+abstract class Vehicle {
   private licensePlate: string;
 
   constructor(licensePlate: string) {
+    if (new.target === Vehicle) {
+      throw new Error("Abstract classes can't be instantiated");
+    }
     this.licensePlate = licensePlate;
   }
+  abstract assignTicket(ticket: ParkingTicket): void;
+}
 
-  getLicensePlate(): string {
-    return this.licensePlate;
+class ParkingTicket {
+  private ticketNumber: string;
+
+  constructor(ticketNumber: string) {
+    this.ticketNumber = ticketNumber;
   }
 
-  setLicensePlate(licensePlate: string): void {
-    this.licensePlate = licensePlate;
+  getTicketNumber(): string {
+    return this.ticketNumber;
+  }
+
+  setTicketNumber(ticketNumber: string): void {
+    this.ticketNumber = ticketNumber;
   }
 }
 
@@ -268,5 +280,45 @@ class Motorcycle extends ParkingSpot {
     } else {
       throw new Error("Parking spot is already free.");
     }
+  }
+}
+
+class Car extends Vehicle {
+  constructor(licenseNo: string) {
+    super(licenseNo);
+  }
+
+  assignTicket(ticket: ParkingTicket): void {
+    // TODO: Implementation for Car
+  }
+}
+
+class Van extends Vehicle {
+  constructor(licenseNo: string) {
+    super(licenseNo);
+  }
+
+  assignTicket(ticket: ParkingTicket): void {
+    // TODO: Implementation for Van
+  }
+}
+
+class Truck extends Vehicle {
+  constructor(licenseNo: string) {
+    super(licenseNo);
+  }
+
+  assignTicket(ticket: ParkingTicket): void {
+    // TODO: Implementation for Truck
+  }
+}
+
+class MotorCycle extends Vehicle {
+  constructor(licenseNo: string) {
+    super(licenseNo);
+  }
+
+  assignTicket(ticket: ParkingTicket): void {
+    // TODO: Implementation for MotorCycle
   }
 }
